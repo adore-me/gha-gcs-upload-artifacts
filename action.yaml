@@ -19,10 +19,6 @@ runs:
       uses: actions/download-artifact@v3.0.0
       with:
         path: ${{ inputs.artifacts-download-path }}
-    - name: 'Cleanup reports dir'
-      shell: bash
-      run:
-        rm -rf ${{ inputs.artifacts-download-path }}.gitkeep || true
     - name: 'Google Auth'
       uses: 'google-github-actions/auth@v0.8.1'
       with:
