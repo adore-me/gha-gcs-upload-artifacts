@@ -4,10 +4,11 @@
 Upload build artifacts to GCS.
 
 ## Inputs
-| Key            | Required | Default | Description                                       |
-|----------------|----------|---------|---------------------------------------------------|
-| **gcs-sa**     | **true** | `N/A`   | Google service account to use for authenticating. |
-| **gcs-bucket** | **true** | `N/A`   | Google Cloud Storage bucket name.                 |
+| Key                         | Required | Default          | Description                                       |
+|-----------------------------|----------|------------------|---------------------------------------------------|
+| **gcs-sa**                  | **true** | `N/A`            | Google service account to use for authenticating. |
+| **gcs-bucket**              | **true** | `N/A`            | Google Cloud Storage bucket name.                 |
+| **artifacts-download-path** | **true** | `build/reports/` | Path to download artifacts to.                    |
 
 ## Outputs
 **N/A**
