@@ -1,0 +1,30 @@
+name: 'AdoreMe Tech Upload Artifacts to GCS Action'
+description: 'Upload all build artifacts to GCS'
+inputs:
+  gcs-sa:
+    description: 'GCS service account to use (from secrets).'
+    required: true
+  gcs-bucket:
+    description: 'GCS bucket to upload to.'
+    required: true
+    default: 'gha-checks-artifacts'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Download all artifacts'
+      uses: actions/download-artifact@v3.0.0
+      with:
+        path: build/reports/
+    - name: 'Cleanup reports dir'
+      shell: bash
+      run:
+        rm -rf build/reports/.gitkeep || true
+    - name: 'Google Auth'
+      uses: 'google-github-actions/auth@v0.8.1'
+      with:
+        credentials_json: ${{ inputs.gcs-sa }}
+    - name: 'Upload Artifacts to GCS'
+      uses: 'google-github-actions/upload-cloud-storage@v0.10.2'
+      with:
+        path: 'build/reports/'
+        destination: '${{ inputs.gcs-bucket }}/${{ github.event.repository.name }}/${{ github.event.number }}'
