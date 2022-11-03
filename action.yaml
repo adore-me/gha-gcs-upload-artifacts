@@ -16,15 +16,15 @@ runs:
   using: 'composite'
   steps:
     - name: 'Download all artifacts'
-      uses: actions/download-artifact@v3.0.0
+      uses: actions/download-artifact@v3.0.1
       with:
         path: ${{ inputs.artifacts-download-path }}
     - name: 'Google Auth'
-      uses: 'google-github-actions/auth@v0.8.1'
+      uses: google-github-actions/auth@v0.8.3
       with:
         credentials_json: ${{ inputs.gcs-sa }}
     - name: 'Upload Artifacts to GCS'
-      uses: 'google-github-actions/upload-cloud-storage@v0.10.2'
+      uses: google-github-actions/upload-cloud-storage@v0.10.4
       with:
         path: ${{ inputs.artifacts-download-path }}
         destination: '${{ inputs.gcs-bucket }}/${{ github.event.repository.name }}/${{ github.event.number }}'
